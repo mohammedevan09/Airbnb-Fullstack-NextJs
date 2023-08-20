@@ -88,7 +88,8 @@ export default async function getListings(params: IListingsParams) {
     }))
 
     return safeListings
-  } catch (error: any) {
-    throw new Error()
+  } catch (error) {
+    console.error('Error fetching listings:', error)
+    throw new Error('An error occurred while fetching listings.')
   }
 }
