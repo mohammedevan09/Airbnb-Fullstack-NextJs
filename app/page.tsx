@@ -40,7 +40,7 @@ const page = async ({ searchParams }: HomeProps) => {
             gap-8
           "
         >
-          {listings.map((listing: SafeListing) => (
+          {listings?.map((listing: SafeListing) => (
             <ListingCard
               currentUser={currentUser}
               key={listing.id}
