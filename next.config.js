@@ -8,6 +8,7 @@ const nextConfig = {
     ],
   },
   ssg: false,
+  exportPathMap: null,
 }
 
 module.exports = nextConfig
