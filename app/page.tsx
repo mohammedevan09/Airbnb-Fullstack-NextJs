@@ -1,17 +1,16 @@
-import getCurrentUser from './actions/getCurrentUser'
-import getListings, { IListingsParams } from './actions/getListings'
+import Container from '@/app/components/Container'
+import ListingCard from '@/app/components/listings/ListingCard'
+import EmptyState from '@/app/components/EmptyState'
+
+import getListings, { IListingsParams } from '@/app/actions/getListings'
+import getCurrentUser from '@/app/actions/getCurrentUser'
 import ClientOnly from './components/ClientOnly'
-import Container from './components/Container'
-import EmptyState from './components/EmptyState'
-import ListingCard from './components/listings/ListingCard'
-import { SafeListing } from './types'
 
 interface HomeProps {
   searchParams: IListingsParams
 }
 
 const page = async ({ searchParams }: HomeProps) => {
-  // console.log(searchParams)
   const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
 
@@ -29,7 +28,6 @@ const page = async ({ searchParams }: HomeProps) => {
         <div
           className="
             pt-24
-            mt-8
             grid 
             grid-cols-1 
             sm:grid-cols-2 
@@ -40,7 +38,7 @@ const page = async ({ searchParams }: HomeProps) => {
             gap-8
           "
         >
-          {listings?.map((listing: SafeListing) => (
+          {listings.map((listing: any) => (
             <ListingCard
               currentUser={currentUser}
               key={listing.id}
