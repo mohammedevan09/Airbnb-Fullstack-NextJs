@@ -2,15 +2,18 @@ import Container from '@/app/components/Container'
 import ListingCard from '@/app/components/listings/ListingCard'
 import EmptyState from '@/app/components/EmptyState'
 
-import getListings from '@/app/actions/getListings'
+import getListings, { IListingsParams } from '@/app/actions/getListings'
 import getCurrentUser from '@/app/actions/getCurrentUser'
 import ClientOnly from './components/ClientOnly'
 
-const page = async ({ searchParams }: any) => {
-  let listings: any = []
-  if (process.env.BUILD_ENVIRONMENT !== 'local') {
-    listings = await getListings(searchParams)
-  }
+interface HomeProps {
+  searchParams: IListingsParams
+}
+
+export const dynamic = 'force-dynamic'
+
+const page = async ({ searchParams }: HomeProps) => {
+  const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
 
   if (listings.length === 0) {
@@ -27,6 +30,7 @@ const page = async ({ searchParams }: any) => {
         <div
           className="
             pt-24
+            mt-3
             grid 
             grid-cols-1 
             sm:grid-cols-2 
