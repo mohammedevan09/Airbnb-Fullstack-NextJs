@@ -2,12 +2,15 @@ import Container from '@/app/components/Container'
 import ListingCard from '@/app/components/listings/ListingCard'
 import EmptyState from '@/app/components/EmptyState'
 
-import getListings, { IListingsParams } from '@/app/actions/getListings'
+import getListings from '@/app/actions/getListings'
 import getCurrentUser from '@/app/actions/getCurrentUser'
 import ClientOnly from './components/ClientOnly'
 
 const page = async ({ searchParams }: any) => {
-  const listings = await getListings(searchParams)
+  let listings: any = []
+  if (process.env.BUILD_ENVIRONMENT !== 'local') {
+    listings = await getListings(searchParams)
+  }
   const currentUser = await getCurrentUser()
 
   if (listings.length === 0) {
