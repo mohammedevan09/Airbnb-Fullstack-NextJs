@@ -6,11 +6,7 @@ import getListings, { IListingsParams } from '@/app/actions/getListings'
 import getCurrentUser from '@/app/actions/getCurrentUser'
 import ClientOnly from './components/ClientOnly'
 
-interface HomeProps {
-  searchParams: IListingsParams
-}
-
-const page = async ({ searchParams }: HomeProps) => {
+const page = async ({ searchParams }: any) => {
   const listings = await getListings(searchParams)
   const currentUser = await getCurrentUser()
 
